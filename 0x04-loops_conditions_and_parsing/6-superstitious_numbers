@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Displays numbers from 1 to 20 conditionally.
 
-iter=0
+iter=1
 while [ $iter -le 20 ]
 do
     echo "$iter"
