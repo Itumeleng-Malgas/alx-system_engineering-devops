@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Displays the content of the current directory.
+
+current_dir=$(ls)
+for item in $current_dir; do
+    # Extract the part of the name after the first dash
+    name_after_dash="${item#*-}"
+
+    echo "$name_after_dash"
+done
