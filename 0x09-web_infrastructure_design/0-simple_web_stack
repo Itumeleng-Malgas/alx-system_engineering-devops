@@ -1,1 +1,37 @@
 https://imgur.com/aBiVlDZ
+
+What is a server
+
+A server is a computer or a software system that provides services, resources,
+or data to other computers, known as clients, over a network.
+
+What is the role of the domain name
+
+is primarily used to provide human-readable addresses for websites and other
+internet resources.
+
+What type of DNS record www is in www.foobar.com
+
+In the domain name "www.foobar.com," the "www" is typically a subdomain, and it is
+represented by a DNS (Domain Name System) record called a "CNAME" record, which stands
+for "Canonical Name" record. This CNAME record is used to alias the "www" subdomain
+to the main domain or another hostname. Essentially, it tells the DNS resolver that
+"www.foobar.com" is equivalent to "foobar.com" or points to the same location.
+
+What is the role of the web server
+
+The most fundamental role of a web server is to deliver web content to clients.
+This content can include HTML pages, images, videos, scripts, and other resources
+that make up a website.
+
+What is the role of the application server
+
+The primary role of an application server is to execute the business logic of an application.
+It processes requests from clients, interacts with databases, and performs various operations
+to deliver the desired functionality. This can include tasks like data processing, calculations,
+and data manipulation.
+
+What is the role of the database
+
+A database plays a crucial role in storing, managing, and organizing structured data in a way that
+allows for efficient data retrieval, modification, and analysis.
