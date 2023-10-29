@@ -1,1 +1,41 @@
 https://imgur.com/SmaN4Bm
+
+# What distribution algorithm your load balancer is configured with and how it works
+
+Request Distribution: When a new request comes in, the load balancer directs the request to the
+next server in the list according to the Round Robin algorithm. The first request goes to the first server,
+the second request goes to the second server, and so on. When the end of the list is reached,
+the algorithm loops back to the beginning and starts again.
+
+Even Distribution: The Round Robin algorithm ensures that each server in the list gets an equal number
+of requests over time, assuming the incoming requests are uniform and have roughly the same processing requirements.
+
+# Active-Active or Active-Passive setup
+
+In an Active-Active setup, all servers or resources are actively handling incoming requests simultaneously.
+This means that all servers are actively processing and responding to traffic.
+
+Active-Active configurations are typically used to achieve high scalability and redundancy.
+If one server fails or becomes overloaded, the remaining active servers can continue to handle the traffic.
+
+In an Active-Passive setup, there is one primary or active server that actively processes incoming requests,
+while the other servers are in a passive or standby state, not actively serving requests.
+
+Active-Passive setups are simpler to manage compared to Active-Active setups because fewer servers are actively
+involved in processing requests at any given time.
+
+# How a database Primary-Replica (Master-Slave) cluster works
+
+Primary-Replica cluster is a database configuration designed to improve performance, high availability, and data redundancy.
+It allows read traffic to be distributed across multiple servers, offers data consistency and redundancy, and provides a
+mechanism for failover in case of primary server failure. This setup is commonly used in production environments to ensure the reliability and scalability of database systems.
+
+# Security issues (no firewall, no HTTPS)
+No Firewall:
+
+Unauthorized Access: Without a firewall, your network and connected devices are more susceptible to unauthorized access.
+Hackers can potentially infiltrate your network and compromise your systems.
+
+No HTTPS:
+
+Data Interception: When data is transmitted over plain HTTP, it's not encrypted, which means that it can be intercepted and read by attackers. This can lead to the exposure of sensitive information, such as login credentials or personal data.

@@ -1,1 +1,55 @@
 https://imgur.com/5oxQh1U
+
+# What are firewalls for
+
+Firewalls are a fundamental component of network security and play a crucial role in safeguarding
+systems and data from a wide range of cyber threats, including unauthorized access, malware,
+denial-of-service attacks, and data exfiltration. They are used in both personal and enterprise settings
+to maintain the confidentiality, integrity, and availability of network resources.
+
+# Why is the traffic served over HTTPS
+
+HTTPS is crucial for ensuring the security, privacy, and integrity of data transmitted over the internet.
+It has become the standard for websites and web applications, helping to protect users and data from a wide
+range of online threats. It's a fundamental component of online security and trustworthiness.
+
+# What monitoring is used for
+
+crucial for maintaining the reliability, security, and performance of IT infrastructure and services. 
+Monitoring can help organizations proactively address issues, optimize resource utilization, and ensure a
+seamless user experience.
+
+# How the monitoring tool is collecting data
+
+The choice of data collection methods depends on the specific monitoring needs, the type of infrastructure being monitored,and the capabilities of the monitoring tool being used.
+	* Agent-Based Monitoring
+	* SNMP-Based Monitoring
+	* Log and Event Data Collection
+	* API and Web Services Integration
+	* Packet Capture and Analysis
+	* Remote Probing and Synthetic Transactions
+
+# Explain what to do if you want to monitor your web server Query Per Second (QPS)
+
+Install monitoring tool on a dedicated server or a machine separate from your web server.
+Configure the monitoring tool to collect QPS data from your web server.
+
+# Why terminating SSL at the load balancer level is an issue
+
+If the load balancer is compromised, there is a risk of SSL keys and decrypted data being exposed.
+This could potentially be a more significant security risk than if SSL termination was done on the
+application servers.
+
+# Why having only one MySQL server capable of accepting writes is an issue
+
+Single Point of Failure (SPOF): If there's only one MySQL server that can accept write operations,
+it becomes a single point of failure. Any hardware or software issues that affect this server can lead
+to downtime and data loss. Hardware failures, database corruption, or even routine maintenance can
+disrupt your services.
+
+# Why having servers with all the same components
+# (database, web server and application server) might be a problem
+
+Lack of Scalability: All-in-one servers may not be able to handle increased load efficiently. For example,
+if you need to scale your web servers to accommodate more traffic, you'll have to scale your database and
+application servers as well, even if they don't need the extra resources. This can be costly and inefficient.
