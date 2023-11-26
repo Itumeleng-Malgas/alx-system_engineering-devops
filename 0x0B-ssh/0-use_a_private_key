@@ -1,6 +1,2 @@
 #!/bin/env bash
-
-server_ip="18.215.160.22"
-user="ubuntu"
-
-ssh -i ~/.ssh/school $user@$server_ip
+ssh -i ~/.ssh/school ubuntu@18.215.160.22
