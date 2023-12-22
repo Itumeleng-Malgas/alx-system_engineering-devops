@@ -1,4 +1,4 @@
-# Filename: 1-install_a_package.pp, install flask from pip3
+# Install Flask version 2.1.0 using pip3
 
 package { 'python3-pip':
   ensure => installed,
@@ -9,4 +9,3 @@ package { 'flask':
   provider => 'pip3',
   require  => Package['python3-pip'],
 }
-
