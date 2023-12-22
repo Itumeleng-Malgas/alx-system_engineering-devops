@@ -1,4 +1,3 @@
-#!/usr/bin/pup
 # Filename: 1-install_a_package.pp, install flask from pip3
 
 package { 'python3-pip':
