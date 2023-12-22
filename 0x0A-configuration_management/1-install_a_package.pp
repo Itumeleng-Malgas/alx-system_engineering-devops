@@ -1,6 +1,5 @@
-# Filename: install_flask.pp
+# Filename: 1-install_a_package.pp, install flask from pip3
 
-# Install Flask
 exec { 'install_flask':
   command => '/usr/bin/pip3 install Flask==2.1.0',
   path    => ['/usr/bin'],
