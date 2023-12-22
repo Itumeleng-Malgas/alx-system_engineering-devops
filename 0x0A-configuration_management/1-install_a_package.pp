@@ -1,3 +1,4 @@
+#!/usr/bin/pup
 # Filename: 1-install_a_package.pp
 
 package { 'Flask':
