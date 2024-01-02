@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Install nginx web server.
+
+# Update package list
+apt-get update
+
+# Install Nginx
+apt-get install -y nginx
+
+# Create index.html with "Hello World!" content
+echo "Hello World!" | tee /var/www/html/index.html > /dev/null
+
+# Configure Nginx to listen on port 80
+echo 'server {
+    listen 80;
+    server_name botlhaledev.tech;
+
+    location / {
+        root /var/www/html;
+        index index.html;
+    }
+}' | tee /etc/nginx/sites-available/default > /dev/null
+
+# Restart Nginx by sending a "hangup" signal (HUP) to the Nginx process
+kill -s HUP $(cat /var/run/nginx.pid)
