@@ -18,7 +18,7 @@ file { '/etc/nginx/sites-available/default':
   mode    => '0644',
   content => "server {
     listen 80;
-    server_name 3.85.148.189;
+    server_name localhost;
 
     location / {
         echo 'Hello World!';

@@ -21,5 +21,5 @@ echo 'server {
     }
 }' | tee /etc/nginx/sites-available/default > /dev/null
 
-# Restart Nginx by sending a "hangup" signal (HUP) to the Nginx process
-kill -s HUP $(cat /var/run/nginx.pid)
+# Restart Nginx
+service nginx restart

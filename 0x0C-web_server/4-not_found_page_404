@@ -18,7 +18,7 @@ echo "Ceci n'est pas une page" | tee /var/www/html/404.html > /dev/null
 create_nginx_config() {
     echo "server {
         listen 80;
-        server_name botlhaledev.tech;
+        server_name localhost;
 
         location /redirect_me {
             return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
@@ -39,4 +39,4 @@ create_nginx_config() {
 create_nginx_config
 
 # Restart Nginx by sending a "hangup" signal (HUP) to the Nginx process
-kill -s HUP $(cat /var/run/nginx.pid)
+service nginx restart
