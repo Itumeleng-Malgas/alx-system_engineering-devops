@@ -1,39 +1,27 @@
-# Install Nginx package
+# Install Nginx web server (w/ Puppet) 
+
+$nginx_version = 'installed'
+$nginx_site_path = '/etc/nginx/sites-enabled/default'
+$nginx_html_path = '/var/www/html/index.html'
+$nginx_html_content = 'Hello World!'
+$nginx_service_name = 'nginx'
+
 package { 'nginx':
-  ensure => 'installed',
+  ensure => $nginx_version,
 }
 
-# Ensure Nginx service is running and enabled
-service { 'nginx':
+file_line { 'configure_nginx_redirect':
+  ensure => 'present',
+  path   => $nginx_site_path,
+  after  => 'listen 80 default_server;',
+  line   => 'location /redirect_me { return 301 https://notreachable.com/; }',
+}
+
+file { $nginx_html_path:
+  content => $nginx_html_content,
+}
+
+service { $nginx_service_name:
   ensure  => 'running',
-  enable  => true,
   require => Package['nginx'],
-}
-
-# Define the default site configuration
-file { '/etc/nginx/sites-available/default':
-  ensure  => file,
-  owner   => 'root',
-  group   => 'root',
-  mode    => '0644',
-  content => "server {
-    listen 80;
-    server_name localhost;
-
-    location / {
-        echo 'Hello World!';
-    }
-
-    location /redirect_me {
-        return 301 https://example.com/;
-    }
-}\n",
-  notify  => Service['nginx'],
-}
-
-# Reload Nginx after making changes
-exec { 'reload_nginx':
-  command     => '/bin/kill -s HUP $(cat /var/run/nginx.pid)',
-  refreshonly => true,
-  subscribe   => File['/etc/nginx/sites-available/default'],
 }
