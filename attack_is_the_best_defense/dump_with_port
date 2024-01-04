@@ -1,0 +1,24 @@
+16:03:56.300512 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [S], seq 2518776504, win 64240, options [mss 1460,sackOK,TS val 2874915954 ecr 0,nop,wscale 7], length 0
+16:03:56.608906 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [S.], seq 3984285255, ack 2518776505, win 32752, options [mss 1350,sackOK,TS val 2136291619 ecr 2874915954,nop,wscale 9], length 0
+16:03:56.608967 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [.], ack 1, win 502, options [nop,nop,TS val 2874916262 ecr 2136291619], length 0
+16:03:56.609109 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [P.], seq 1:37, ack 1, win 502, options [nop,nop,TS val 2874916263 ecr 2136291619], length 36
+16:03:56.642802 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [.], ack 37, win 6143, options [TS val 2136291619 ecr 2874916263,nop,nop], length 0
+16:03:56.915545 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [P.], seq 1:48, ack 37, win 6144, options [TS val 2136291823 ecr 2874916263,nop,nop], length 47
+16:03:56.915589 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [.], ack 48, win 502, options [nop,nop,TS val 2874916569 ecr 2136291823], length 0
+16:03:56.915613 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [P.], seq 48:178, ack 37, win 6144, options [TS val 2136291823 ecr 2874916263,nop,nop], length 130
+16:03:56.915633 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [.], ack 178, win 501, options [nop,nop,TS val 2874916569 ecr 2136291823], length 0
+16:03:58.252402 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [P.], seq 37:49, ack 178, win 501, options [nop,nop,TS val 2874917906 ecr 2136291823], length 12
+16:03:58.321502 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [.], ack 49, win 6143, options [TS val 2136293296 ecr 2874917906,nop,nop], length 0
+16:03:58.554213 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [P.], seq 178:196, ack 49, win 6144, options [TS val 2136293499 ecr 2874917906,nop,nop], length 18
+16:03:58.554258 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [.], ack 196, win 501, options [nop,nop,TS val 2874918208 ecr 2136293499], length 0
+16:04:00.254000 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [P.], seq 49:63, ack 196, win 501, options [nop,nop,TS val 2874919907 ecr 2136293499], length 14
+16:04:00.397733 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [.], ack 63, win 6143, options [TS val 2136295347 ecr 2874919907,nop,nop], length 0
+16:04:00.602548 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [P.], seq 196:214, ack 63, win 6144, options [TS val 2136295550 ecr 2874919907,nop,nop], length 18
+16:04:00.602597 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [.], ack 214, win 501, options [nop,nop,TS val 2874920256 ecr 2136295550], length 0
+16:04:02.255766 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [P.], seq 63:85, ack 214, win 501, options [nop,nop,TS val 2874921909 ecr 2136295550], length 22
+16:04:02.445634 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [.], ack 85, win 6143, options [TS val 2136297296 ecr 2874921909,nop,nop], length 0
+16:04:02.602113 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [P.], seq 214:266, ack 85, win 6144, options [TS val 2136297576 ecr 2874921909,nop,nop], length 52
+16:04:02.602160 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [.], ack 266, win 501, options [nop,nop,TS val 2874922256 ecr 2136297576], length 0
+16:04:02.629237 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [F.], seq 266, ack 85, win 6144, options [TS val 2136297608 ecr 2874922256,nop,nop], length 0
+16:04:02.629361 IP dev-pad.52350 > ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission: Flags [F.], seq 85, ack 267, win 501, options [nop,nop,TS val 2874922283 ecr 2136297608], length 0
+16:04:02.695642 IP ec2-54-228-39-88.eu-west-1.compute.amazonaws.com.submission > dev-pad.52350: Flags [.], ack 86, win 6144, options [TS val 2136297673 ecr 2874922283,nop,nop], length 0

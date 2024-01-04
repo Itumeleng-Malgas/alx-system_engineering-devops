@@ -1,0 +1,18 @@
+EHLO ismtpd0001p1las1.sendgrid.net
+220 SG ESMTP service ready at geopod-ismtpd-5
+250-smtp.sendgrid.net
+250-8BITMIME
+250-PIPELINING
+250-SIZE 31457280
+250-STARTTLS
+250-AUTH PLAIN LOGIN
+250 AUTH=PLAIN LOGIN
+auth login
+334 VXNlcm5hbWU6
+bXlsb2dpbg==
+334 UGFzc3dvcmQ6
+bXlwYXNzd29yZDk4OTgh
+535 Authentication failed: Bad username / password
+
+
+password from base64: "mypassword9898!"
