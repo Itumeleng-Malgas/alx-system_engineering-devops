@@ -1,1 +1,5 @@
+#!/usr/bin/env bash
+# Fix my server with these magic 2 lines
+
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
+service apache2 restart
