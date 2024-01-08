@@ -42,5 +42,6 @@ sudo cp "$new_conf" "$haproxy_conf"
 sudo rm "$new_conf"
 
 # Enable and restart HAProxy service
-sudo systemctl enable haproxy
 sudo systemctl restart haproxy
+sudo systemctl enable haproxy
+sudo systemctl status haproxy
