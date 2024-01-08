@@ -6,32 +6,26 @@ sudo apt-get update
 # Install HAProxy
 sudo apt-get install -y haproxy
 
-#Enable the management via the init script
-echo "ENABLED=1" >> /etc/haproxy/haproxy.cfg
-
 # Function to modify HAProxy frontend and backend sections
 modify_haproxy_config() {
     local haproxy_conf="/etc/haproxy/haproxy.cfg"
-    sudo cp "$haproxy_conf" "$haproxy_conf.bak"
+
+    # Identify the line numbers for 'global' and 'defaults'
+    local start_line
+    start_line=$(awk '/^global$/{print NR}' "$haproxy_conf")
+
+    local end_line
+    end_line=$(awk '/^defaults$/{print NR}' "$haproxy_conf")
 
     # Preserve the existing global and defaults sections
-    sudo awk '/^global$/,/^defaults$/' "$haproxy_conf" | sudo tee temp_config > /dev/null
-    sudo mv temp_config "$haproxy_conf"
+    sudo sed -n "${start_line},${end_line}p" "$haproxy_conf" | sudo tee temp_config > /dev/null
 
-    # Modify the frontend and backend sections
-    echo "
-frontend main
-    bind *:80
-    default_backend web_servers
-
-backend web_servers
-    balance roundrobin
-    server web-01 3.85.148.189:80 check
-    server web-02 54.87.195.116:80 check
-" | sudo tee -a "$haproxy_conf" > /dev/null
+    # Create a backup by copying the original file
+    sudo cp "$haproxy_conf" "$haproxy_conf.bak"
 }
 
+# Call the function to modify the HAProxy configuration
 modify_haproxy_config
 
-# HAProxy service restart
+# Ensure HAProxy is running
 sudo service haproxy restart
