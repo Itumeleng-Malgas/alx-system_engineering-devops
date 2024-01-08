@@ -6,9 +6,13 @@ sudo apt-get update
 # Install HAProxy
 sudo apt-get install -y haproxy
 
+#Enable the management via the init script
+echo "ENABLED=1" >> /etc/haproxy/haproxy.cfg
+
 # Function to modify HAProxy frontend and backend sections
 modify_haproxy_config() {
     local haproxy_conf="/etc/haproxy/haproxy.cfg"
+    sudo cp "$haproxy_conf" "$haproxy_conf.bak"
 
     # Preserve the existing global and defaults sections
     sudo awk '/^global$/,/^defaults$/' "$haproxy_conf" | sudo tee temp_config > /dev/null
@@ -27,9 +31,7 @@ backend web_servers
 " | sudo tee -a "$haproxy_conf" > /dev/null
 }
 
-# Call the function to modify the HAProxy configuration
 modify_haproxy_config
 
-# Enable and start the HAProxy service (systemd)
-sudo systemctl enable haproxy
-sudo systemctl start haproxy
+# HAProxy service restart
+sudo service haproxy restart
