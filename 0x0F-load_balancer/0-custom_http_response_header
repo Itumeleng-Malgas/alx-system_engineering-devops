@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Install nginx web server.
+
+# Update package list
+apt-get update
+
+# Install Nginx
+apt-get install -y nginx
+
+# Create document root directory
+mkdir -p /var/www/html
+
+# Create index.html with "Hello World!" content
+echo "Hello World!" | tee /var/www/html/index.html > /dev/null
+echo "Ceci n'est pas une page" | tee /var/www/html/404.html > /dev/null
+
+# Nginx configuration with redirection and 404 error handle
+create_nginx_config() {
+    echo "server {
+        listen 80;
+        server_name localhost;
+
+        location /redirect_me {
+            return 301 https://intranet.alxswe.com/;
+        }
+
+        location / {
+	    
+	    # Add the custom HTTP response header
+            add_header X-Served-By \$hostname;
+            
+	    root /var/www/html;
+            index index.html;
+        }
+
+        error_page 404 /404.html;
+        location = /404.html {
+	    root /var/www/html;
+            internal;
+        }
+    }" | sudo tee /etc/nginx/sites-available/default > /dev/null
+}
+create_nginx_config
+
+# Restart Nginx.
+service nginx restart
