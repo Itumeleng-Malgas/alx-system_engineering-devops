@@ -1,19 +1,29 @@
 #!/usr/bin/env bash
 
+haproxy_conf="/etc/haproxy/haproxy.cfg"
+bak_file="$haproxy_conf.bak"
+
+# Check if the backup file exists
+if [ -f "$bak_file" ]; then
+    original_conf="$bak_file"
+else
+    # Backup the original configuration file
+    sudo cp "$haproxy_conf" "$bak_file"
+    original_conf="$haproxy_conf"
+fi
+
 # Update the package repository
 sudo apt-get update
 
 # Install HAProxy
 sudo apt-get install -y haproxy
 
+# Enable the management via the init script
+echo "ENABLED=1" >> "$original_conf"
+
 # Function to modify HAProxy frontend and backend sections
 modify_haproxy_config() {
-    local haproxy_conf="/etc/haproxy/haproxy.cfg"
-
-    # Create a backup by copying the original file
-    sudo cp "$haproxy_conf" "$haproxy_conf.bak"
-
-    # Modify the frontend and backend sections
+    # Modify the frontend and backend sections and append to the backup file
     echo "
 frontend main
     bind *:80
@@ -23,10 +33,9 @@ backend web_servers
     balance roundrobin
     server web-01 3.85.148.189:80 check
     server web-02 54.87.195.116:80 check
-" | sudo tee -a "$haproxy_conf" > /dev/null
+" | sudo tee -a "$original_conf" > /dev/null
 }
 
-# Call the function to modify the HAProxy configuration
 modify_haproxy_config
 
 # HAProxy service restart
