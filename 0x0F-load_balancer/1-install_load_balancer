@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# setup HAProxy loadbalancer
 
 haproxy_conf="/etc/haproxy/haproxy.cfg"
 bak_file="/etc/haproxy/haproxy.cfg.bak"
