@@ -5,9 +5,10 @@ bak_file="$haproxy_conf.bak"
 
 # Check if the backup file exists
 if [ -f "$bak_file" ]; then
+    # If the backup file exists, use it as the original configuration file
     original_conf="$bak_file"
 else
-    # Backup the original configuration file
+    # If the backup file does not exist, create a new backup file
     sudo cp "$haproxy_conf" "$bak_file"
     original_conf="$haproxy_conf"
 fi
@@ -38,5 +39,5 @@ backend web_servers
 
 modify_haproxy_config
 
-# HAProxy service restart
-sudo service haproxy restart
+# Restart HAProxy service after enabling it
+sudo systemctl enable --now haproxy
