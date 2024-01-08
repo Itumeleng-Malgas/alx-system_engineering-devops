@@ -4,7 +4,6 @@
 haproxy_conf="/etc/haproxy/haproxy.cfg"
 bak_file="/etc/haproxy/haproxy.cfg.bak"
 new_conf="/etc/haproxy/haproxy.new.cfg"
-student_id="343996"
 
 # Check if the backup file exists
 if [ -f "$bak_file" ]; then
@@ -31,15 +30,12 @@ frontend main
 
 backend web_servers
     balance roundrobin
-    server $student_id-web-01 3.85.148.189:80 check
-    server $student_id-web-02 54.87.195.116:80 check
+    server web-01 3.85.148.189:80 check
+    server web-02 54.87.195.116:80 check
 " | sudo tee -a "$new_conf" > /dev/null
 }
 
 create_new_haproxy_config
-
-# Enable the HAProxy management via the init script
-echo "ENABLED=1" | sudo tee -a /etc/default/haproxy > /dev/null
 
 # Replace the original configuration with the new one
 sudo cp "$new_conf" "$haproxy_conf"
