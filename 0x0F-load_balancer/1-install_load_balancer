@@ -42,6 +42,7 @@ echo "ENABLED=1" | sudo tee -a /etc/default/haproxy > /dev/null
 
 # Replace the original configuration with the new one
 sudo cp "$new_conf" "$haproxy_conf"
+sudo rm "$new_conf"
 
 # Enable and restart HAProxy service
 sudo systemctl enable haproxy
