@@ -30,5 +30,6 @@ backend web_servers
 # Call the function to modify the HAProxy configuration
 modify_haproxy_config
 
-# Ensure HAProxy is running
-sudo service haproxy restart
+# Enable and start the HAProxy service (systemd)
+sudo systemctl enable haproxy
+sudo systemctl start haproxy
