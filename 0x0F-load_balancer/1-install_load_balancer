@@ -9,10 +9,9 @@ sudo apt-get install -y haproxy
 # Function to modify HAProxy frontend and backend sections
 modify_haproxy_config() {
     local haproxy_conf="/etc/haproxy/haproxy.cfg"
-    local student_id="343996"
 
     # Preserve the existing global and defaults sections
-    sudo awk '/^global$/,/^defaults$/' "$haproxy_conf" > temp_config
+    sudo awk '/^global$/,/^defaults$/' "$haproxy_conf" | sudo tee temp_config > /dev/null
     sudo mv temp_config "$haproxy_conf"
 
     # Modify the frontend and backend sections
