@@ -1,30 +1,27 @@
 #!/usr/bin/env bash
 
 haproxy_conf="/etc/haproxy/haproxy.cfg"
-bak_file="$haproxy_conf.bak"
+bak_file="/etc/haproxy/haproxy.cfg.bak"
+new_conf="/etc/haproxy/haproxy.new.cfg"
 
 # Check if the backup file exists
 if [ -f "$bak_file" ]; then
-    # If the backup file exists, use it as the original configuration file
     original_conf="$bak_file"
 else
-    # If the backup file does not exist, create a new backup file
     sudo cp "$haproxy_conf" "$bak_file"
     original_conf="$haproxy_conf"
 fi
 
-# Update the package repository
+# Update the package repository and install HAProxy
 sudo apt-get update
-
-# Install HAProxy
 sudo apt-get install -y haproxy
 
-# Enable the management via the init script
-echo "ENABLED=1" >> "$original_conf"
+# Function to create a new HAProxy configuration file
+create_new_haproxy_config() {
+    # Copy the contents of the backup file to the new configuration file
+    sudo cp "$original_conf" "$new_conf"
 
-# Function to modify HAProxy frontend and backend sections
-modify_haproxy_config() {
-    # Modify the frontend and backend sections and append to the backup file
+    # Append the frontend and backend sections to the new configuration file
     echo "
 frontend main
     bind *:80
@@ -34,10 +31,14 @@ backend web_servers
     balance roundrobin
     server web-01 3.85.148.189:80 check
     server web-02 54.87.195.116:80 check
-" | sudo tee -a "$original_conf" > /dev/null
+" | sudo tee -a "$new_conf" > /dev/null
 }
 
-modify_haproxy_config
+create_new_haproxy_config
 
-# Restart HAProxy service after enabling it
-sudo systemctl enable --now haproxy
+# Replace the original configuration with the new one
+sudo cp "$new_conf" "$haproxy_conf"
+
+# Enable and restart HAProxy service
+sudo systemctl enable haproxy
+sudo systemctl restart haproxy
