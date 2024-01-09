@@ -38,7 +38,7 @@ backend web_servers
 create_new_haproxy_config
 
 # Enable the HAProxy management via the init script
-sed -i '/^ENABLED=1$/! s/$/\nENABLED=1/' /etc/default/haproxy
+sudo sed -i 's|ENABLED=0|ENABLED=1|' /etc/default/haproxy
 
 # Replace the original configuration with the new one
 sudo cp "$new_conf" "$haproxy_conf"
