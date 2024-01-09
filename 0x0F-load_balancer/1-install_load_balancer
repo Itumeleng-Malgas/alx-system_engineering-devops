@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 # setup HAProxy loadbalancer
 
 haproxy_conf="/etc/haproxy/haproxy.cfg"
@@ -36,6 +36,9 @@ backend web_servers
 }
 
 create_new_haproxy_config
+
+# Enable the HAProxy management via the init script
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy > /dev/null
 
 # Replace the original configuration with the new one
 sudo cp "$new_conf" "$haproxy_conf"
