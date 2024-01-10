@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# find out what’s keeping Nginx installation from listening on port 80
+
+# Check if Nginx is installed
+if ! command -v nginx &> /dev/null; then
+    echo "Nginx is not installed. Installing..."
+    sudo apt-get update
+    sudo apt-get install -y nginx
+fi
+
+# Check Nginx configuration
+if ! sudo nginx -t &> /dev/null; then
+    echo "Nginx configuration test failed."
+    exit 1
+fi
+
+# Check if Nginx is running on port 80
+sudo netstat -tuln | grep ':80 ' &> /dev/null || sudo service nginx start
+
+# Check if firewall allows traffic on port 80
+sudo ufw status | grep -q "80.*ALLOW" || sudo ufw allow 80
