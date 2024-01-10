@@ -3,13 +3,9 @@
 
 # Check if Nginx is installed
 if ! command -v nginx &> /dev/null; then
-    echo "Nginx is not installed. Installing..."
-    sudo apt-get update
-    sudo apt-get install -y nginx
+    sudo apt-get update && sudo apt-get install -y nginx
 fi
-
-# site-enable is linked to site-available
-sudo ln -sf /etc/nginx/site-available/default /etc/nginx/site-enabled/default
 
 # Ensure Nginx is running
 sudo service nginx start
+
