@@ -8,5 +8,8 @@ if ! command -v nginx &> /dev/null; then
     sudo apt-get install -y nginx
 fi
 
+# Enable the nginx management via the init script
+sudo sed -i 's|ENABLED=0|ENABLED=1|' /etc/default/nginx
+
 # Check if Nginx is running on port 80
 sudo service nginx start
