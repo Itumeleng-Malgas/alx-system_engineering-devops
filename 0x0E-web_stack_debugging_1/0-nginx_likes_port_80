@@ -7,5 +7,5 @@ if ! command -v nginx &> /dev/null; then
     sudo apt-get install -y nginx
 fi
 
-# Check if Nginx is running
-sudo service nginx restart
+# Check if Nginx is running on port 80
+sudo service nginx start
