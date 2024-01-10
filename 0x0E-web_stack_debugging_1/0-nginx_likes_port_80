@@ -9,8 +9,3 @@ fi
 
 # Check if Nginx is running
 sudo service nginx restart
-
-# Check if Nginx container is running and expose port 80
-if ! docker ps | grep -q "nginx_container"; then
-    docker run -d -p 80:80 --name nginx_container nginx
-fi
