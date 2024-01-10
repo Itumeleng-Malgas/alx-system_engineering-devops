@@ -1,12 +1,29 @@
 #!/usr/bin/env bash
 # find out what’s keeping Nginx installation from listening on port 80
 
-# Check if Nginx is installed
-if ! command -v nginx &> /dev/null; then
-    echo "Nginx is not installed. Installing..."
-    sudo apt-get update
-    sudo apt-get install -y nginx
+sudo apt-get update
+sudo apt-get install -y net-tools lsof
+
+# Check if Nginx is running
+nginx_pid=$(sudo lsof -t -i :80)
+if [ -z "$nginx_pid" ]; then
+    # Start Nginx if not running
+    sudo service nginx start
 fi
 
-# Check if Nginx is running on port 80
-sudo service nginx start
+# Check Nginx configuration
+nginx_conf="/etc/nginx/nginx.conf"
+if [ -f "$nginx_conf" ]; then
+    # Update the listen directive to 80 if needed
+    if ! grep -q "listen 80;" "$nginx_conf"; then
+        sudo sed -i 's/\(listen[[:space:]]\+\)[0-9]\+;/\180;/g' "$nginx_conf"
+        # Restart Nginx
+        sudo service nginx restart
+    fi
+else
+    echo "Nginx configuration file not found: $nginx_conf"
+fi
+
+# Verify Nginx is listening on port 80
+sudo lsof -i :80
+
