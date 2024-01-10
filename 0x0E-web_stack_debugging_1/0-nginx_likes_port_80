@@ -8,11 +8,9 @@ if ! command -v nginx &> /dev/null; then
 fi
 
 # Check if Nginx is running
-if ! sudo service nginx status | grep -q "active (running)"; then
-    sudo service nginx start
-fi
+sudo service nginx restart
 
 # Check if Nginx container is running and expose port 80
-if ! docker ps | grep -q "nginx-container"; then
-    docker run -d -p 80:80 --name nginx-container nginx
+if ! docker ps | grep -q "nginx_container"; then
+    docker run -d -p 80:80 --name nginx_container nginx
 fi
