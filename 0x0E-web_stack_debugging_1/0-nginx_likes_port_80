@@ -10,3 +10,4 @@ fi
 
 # Check if Nginx is running on port 80
 sudo service nginx start
+exit 0
