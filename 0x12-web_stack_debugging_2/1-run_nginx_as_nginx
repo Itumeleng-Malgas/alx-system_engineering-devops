@@ -4,12 +4,12 @@
 # Stop processes using port 8080
 fuser -k 8080/tcp
 
-# Update Nginx Configuration
-awk '/^user/ { print "user nginx;"; next } 1' /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.tmp
-mv /etc/nginx/nginx.conf.tmp /etc/nginx/nginx.conf
+service nginx stop
+useradd -r -s /sbin/nologin nginx
+chown -R nginx:nginx /var/www/html
 
-awk '/^listen/ { print "listen 8080;"; next } 1' /etc/nginx/sites-available/default > /etc/nginx/sites-available/default.tmp
-mv /etc/nginx/sites-available/default.tmp /etc/nginx/sites-available/default
+sed -i 's/^user ./user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/^listen .;/listen 8080;/g' /etc/nginx/sites-available/default
 
 # Reload and start Nginx
 service nginx reload
