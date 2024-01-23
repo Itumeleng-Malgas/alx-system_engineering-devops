@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Configure Nginx to run as the "nginx" user
+
+systemctl stop nginx
+
+useradd -r -s /sbin/nologin nginx
+chown -R nginx:nginx /var/www/html
+
+sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/^listen .*;/listen 8080;/g' /etc/nginx/sites-available/default
+
+systemctl start nginx
