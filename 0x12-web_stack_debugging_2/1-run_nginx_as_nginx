@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Configure Nginx to run as the "nginx" user
 
-# Stop processes using ports 80 and 8080
+# Stop processes using port 8080
 kill -9 $(sudo lsof -t -i :8080)
 
 sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
