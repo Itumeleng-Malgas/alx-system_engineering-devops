@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # Configure Nginx to run as the "nginx" user
 
-pkill -9 apache
+# Stop processes using port 8080
+fuser -k 8080/tcp
 
 sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
 sed -i 's/^listen .*;/listen 8080;/g' /etc/nginx/sites-available/default
 
-service nginx reload
 service nginx start
