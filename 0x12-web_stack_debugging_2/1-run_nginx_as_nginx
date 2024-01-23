@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 # Configure Nginx to run as the "nginx" user on port 8080
 
+# Stop processes using port 8080 and 80
+fuser -k 8080/tcp
+fuser -k 80/tcp
+
 sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
 sed -i "s/80/8080/g" /etc/nginx/sites-available/default
-chmod 777 /etc/nginx/nginx.conf
 
+chmod 777 /etc/nginx/nginx.conf
 service nginx start
