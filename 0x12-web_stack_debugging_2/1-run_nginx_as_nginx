@@ -7,5 +7,4 @@ fuser -k 8080/tcp
 sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
 sed -i "s/80/8080/g" /etc/nginx/sites-available/default
 
-# Restart Nginx
-sudo -u nginx service nginx restart
+service nginx start
