@@ -6,5 +6,6 @@ fuser -k 8080/tcp
 
 sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
 sed -i "s/80/8080/g" /etc/nginx/sites-available/default
+chmod 777 /etc/nginx/nginx.conf
 
 service nginx start
