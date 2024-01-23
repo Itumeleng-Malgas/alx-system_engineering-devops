@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
-# Configure Nginx to run as the "nginx" user
+# Configure Nginx to run as the "nginx" user on port 8080
 
 # Stop processes using port 8080
 fuser -k 8080/tcp
 
-sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
-sed -i 's/^listen .*;/listen 8080;/g' /etc/nginx/sites-available/default
+# Update Nginx Configuration
+awk '/^user/ { print "user nginx;"; next } 1' /etc/nginx/nginx.conf > /etc/nginx/nginx.conf.tmp
+mv /etc/nginx/nginx.conf.tmp /etc/nginx/nginx.conf
 
+awk '/^listen/ { print "listen 8080;"; next } 1' /etc/nginx/sites-available/default > /etc/nginx/sites-available/default.tmp
+mv /etc/nginx/sites-available/default.tmp /etc/nginx/sites-available/default
+
+# Reload and start Nginx
+service nginx reload
 service nginx start
