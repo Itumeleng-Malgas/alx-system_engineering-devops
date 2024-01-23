@@ -4,12 +4,8 @@
 # Stop processes using port 8080
 fuser -k 8080/tcp
 
-service nginx stop
-useradd -r -s /sbin/nologin nginx
-chown -R nginx:nginx /var/www/html
-
-sed -i 's/^user ./user nginx;/' /etc/nginx/nginx.conf
-sed -i 's/^listen .;/listen 8080;/g' /etc/nginx/sites-available/default
+sed -i "s/#user www-data/user nginx/" /etc/nginx/nginx.conf
+sed -i "s/80/8080/g" /etc/nginx/sites-available/default
 
 # Reload and start Nginx
 service nginx reload
