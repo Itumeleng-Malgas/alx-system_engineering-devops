@@ -1,0 +1,10 @@
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+log-error=/var/log/mysql/error.log
+pid-file=/var/run/mysqld/mysqld.pid
+bind-address=0.0.0.0  # Commented out to allow connections from any host
+
+server-id=1
+log_bin=/var/log/mysql/mysql-bin.log
+binlog_do_db=tyrell_corp

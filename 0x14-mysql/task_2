@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# MySQL credentials
+MYSQL_PASSWORD="$1"
+
+# Database and table names
+DB_NAME="tyrell_corp"
+TABLE_NAME="nexus6"
+
+# MySQL commands
+CREATE_DB="CREATE DATABASE $DB_NAME;"
+USE_DB="USE $DB_NAME;"
+CREATE_TABLE="CREATE TABLE $TABLE_NAME (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL);"
+INSERT_DATA="INSERT INTO $TABLE_NAME (name) VALUES ('Leon');"
+GRANT_PERMISSIONS="GRANT SELECT ON $DB_NAME.$TABLE_NAME TO '$MYSQL_USER'@'localhost';"
+FLUSH_PRIVILEGES="FLUSH PRIVILEGES;"
+
+# Execute commands
+mysql -u root -p"$MYSQL_PASSWORD" -e "$CREATE_DB"
+mysql -u root -p"$MYSQL_PASSWORD" -e "$USE_DB $CREATE_TABLE $INSERT_DATA $GRANT_PERMISSIONS $FLUSH_PRIVILEGES"
+
+echo "Database and table created, and permissions granted."
