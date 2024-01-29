@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 """Script that uses the requests module"""
-
+import csv
 import requests
 import sys
-import csv
 
 
 def fetch_employee_data(employee_id):
