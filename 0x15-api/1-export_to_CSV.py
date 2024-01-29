@@ -70,7 +70,9 @@ def export_to_csv(employee_id, employee_name, todo_list):
     csv_filename = f"{employee_id}.csv"
 
     with open(csv_filename, mode='w', newline='') as csv_file:
-        writer = csv.DictWriter(csv_file)
+        fieldnames = (
+                ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
 
         for task in todo_list:
             writer.writerow({
