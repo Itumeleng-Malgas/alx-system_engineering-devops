@@ -46,7 +46,8 @@ def export_to_csv(employee_id, employee_name, todo_list):
 
     with open(csv_filename, mode='w', newline='') as csv_file:
         fields = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
-        writer = csv.DictWriter(csv_file, fieldnames=fields, quoting=csv.QUOTE_ALL)
+        writer = csv.DictWriter(
+                csv_file, fieldnames=fields, quoting=csv.QUOTE_ALL)
 
         for task in todo_list:
             writer.writerow({
