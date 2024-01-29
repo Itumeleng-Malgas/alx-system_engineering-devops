@@ -33,12 +33,12 @@ def display_todo_progress(employee_id):
     employee_data = fetch_employee_data(employee_id)
     todo_list = fetch_todo_list(employee_id)
 
-    employee_name = employee_data.get('name')
+    employee_username = employee_data.get('username')
 
-    export_to_csv(employee_id, employee_name, todo_list)
+    export_to_csv(employee_id, employee_username, todo_list)
 
 
-def export_to_csv(employee_id, employee_name, todo_list):
+def export_to_csv(employee_id, employee_username, todo_list):
     """
     Exports the employee's todo list to a CSV file.
     """
@@ -52,7 +52,7 @@ def export_to_csv(employee_id, employee_name, todo_list):
         for task in todo_list:
             writer.writerow({
                 "USER_ID": employee_id,
-                "USERNAME": employee_name,
+                "USERNAME": employee_username,
                 "TASK_COMPLETED_STATUS": task["completed"],
                 "TASK_TITLE": task["title"]
             })
