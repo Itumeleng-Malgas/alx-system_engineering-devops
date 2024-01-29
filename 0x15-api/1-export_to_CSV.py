@@ -3,6 +3,7 @@
 
 import requests
 import sys
+import csv
 
 
 def fetch_employee_data(employee_id):
@@ -59,6 +60,30 @@ def display_todo_progress(employee_id):
 
     for task in completed_tasks:
         print(f"\t {task['title']}")
+
+    export_to_csv(employee_id, employee_name, todo_list)
+
+
+def export_to_csv(employee_id, employee_name, todo_list):
+    """
+    Exports the employee's todo list to a CSV file.
+    """
+    csv_filename = f"{employee_id}.csv"
+
+    with open(csv_filename, mode='w', newline='') as csv_file:
+        fieldnames = (
+                ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+
+        writer.writeheader()
+
+        for task in todo_list:
+            writer.writerow({
+                "USER_ID": employee_id,
+                "USERNAME": employee_name,
+                "TASK_COMPLETED_STATUS": task["completed"],
+                "TASK_TITLE": task["title"]
+            })
 
 
 if __name__ == "__main__":
