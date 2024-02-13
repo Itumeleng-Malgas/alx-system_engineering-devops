@@ -7,10 +7,14 @@ import requests
 
 def recurse(subreddit, hot_list=[], after=None):
     """ Queries the Reddit API for titles of all hot articles """
+
+    if hot_list is None:
+        hot_list = []
+
     try:
-        url = f"https://www.reddit.com/r/{subreddit}/hot.json?limit=10"
+        url = f"https://www.reddit.com/r/{subreddit}/hot.json"
         headers = {'User-Agent': 'Custom-User-Agent'}
-        params = {'after': after} if after else {}
+        params = {'limit': 10, 'after': after} if after else {'limit': 10}
 
         response = requests.get(url, headers=headers, params=params,
                                 allow_redirects=False)
@@ -22,14 +26,14 @@ def recurse(subreddit, hot_list=[], after=None):
             if not children:
                 return hot_list if hot_list else None
 
-            for post in children:
-                hot_list.append(post.get('data', {}).get('title'))
+            hot_list.extend([post.get('data', {}).get('title')
+                            for post in children])
 
             after = data.get('after')
             return recurse(subreddit, hot_list, after)
 
-        elif response.status_code == 404:
+        else:
             return None
 
-    except Exception as e:
+    except Exception:
         return None
