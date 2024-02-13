@@ -8,32 +8,35 @@ import requests
 def recurse(subreddit, hot_list=[], after=None):
     """ Queries the Reddit API for titles of all hot articles """
 
-    if hot_list is None:
-        hot_list = []
-
-    try:
-        url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-        headers = {'User-Agent': 'Custom-User-Agent'}
-        params = {'limit': 10, 'after': after} if after else {'limit': 10}
-
-        response = requests.get(url, headers=headers, params=params,
-                                allow_redirects=False)
-
-        if response.status_code == 200:
-            data = response.json().get('data', {})
-            children = data.get('children', [])
-
-            if not children:
-                return hot_list if hot_list else None
-
-            hot_list.extend([post.get('data', {}).get('title')
-                            for post in children])
-
-            after = data.get('after')
-            return recurse(subreddit, hot_list, after)
-
-        else:
-            return None
-
-    except Exception:
+    if not is_valid_subreddit(subreddit):
         return None
+
+    url = f'https://www.reddit.com/r/{subreddit}/hot.json'
+    params = {'limit': 100, 'after': after}
+    headers = {'User-Agent': 'MyRedditBot/1.0 by Itumeleng-Malgas'}
+
+    response = requests.get(url, params=params, headers=headers)
+
+    if response.status_code != 200:
+        return None
+
+    data = response.json().get('data', {})
+    children = data.get('children', [])
+
+    if not children:
+        return hot_list
+
+    for post in children:
+        title = post.get('data', {}).get('title', '')
+        hot_list.append(title)
+
+    after = data.get('after')
+    return recurse(subreddit, hot_list, after)
+
+def is_valid_subreddit(subreddit):
+    url = f'https://www.reddit.com/r/{subreddit}/about.json'
+    headers = {'User-Agent': 'MyRedditBot/1.0 by Itumeleng-Malgas'}
+
+    response = requests.get(url, headers=headers)
+
+    return response.status_code == 200
