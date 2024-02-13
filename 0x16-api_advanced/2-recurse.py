@@ -26,11 +26,10 @@ def recurse(subreddit, hot_list=[], after=None):
             if not children:
                 return hot_list if hot_list else None
 
-            hot_list.extend([post.get('data', {}).get('title')
-                            for post in children])
+            hot_list.append(children[0].get('data', {}).get('title'))
 
-            after = data.get('after')
-            return recurse(subreddit, hot_list, after)
+            next_level = recurse(subreddit, hot_list, data.get('after'))
+            return next_level if data.get('after') else hot_list
 
         else:
             return None
