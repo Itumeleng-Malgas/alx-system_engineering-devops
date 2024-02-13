@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Module that that queries the Reddit API and returns the
 number of subscribers
