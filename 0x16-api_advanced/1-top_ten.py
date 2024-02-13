@@ -18,5 +18,5 @@ def top_ten(subreddit):
                 print(post['data']['title'])
         elif response.status_code == 404:
             print(None)
-    except Exception as e:
+    except Exception:
         print(None)
