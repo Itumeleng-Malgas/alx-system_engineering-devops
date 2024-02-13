@@ -4,6 +4,7 @@ the titles of all hot articles for a given subreddit.
 """
 import requests
 
+
 def recurse(subreddit, hot_list=[], after=None):
     """ Queries the Reddit API for titles of all hot articles """
     try:
@@ -11,7 +12,8 @@ def recurse(subreddit, hot_list=[], after=None):
         headers = {'User-Agent': 'Custom-User-Agent'}
         params = {'after': after} if after else {}
 
-        response = requests.get(url, headers=headers, params=params, allow_redirects=False)
+        response = requests.get(url, headers=headers, params=params,
+                                allow_redirects=False)
 
         if response.status_code == 200:
             data = response.json().get('data', {})
