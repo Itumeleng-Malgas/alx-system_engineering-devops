@@ -12,7 +12,7 @@ def top_ten(subreddit):
     headers = {'User-Agent': 'Custom-User-Agent'}
 
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, allow_redirects=False)
         if response.status_code == 200:
             for post in response.json()['data']['children']:
                 print(post['data']['title'])
