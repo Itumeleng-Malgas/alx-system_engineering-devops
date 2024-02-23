@@ -2,7 +2,7 @@
 
 server {
     listen 80;
-    server_name your_server_ip_or_domain;
+    server_name web-01.botlhaledev.tech;
 
     location /airbnb-onepage/ {
         proxy_pass http://127.0.0.1:5000;
@@ -20,11 +20,5 @@ server {
         proxy_set_header X-Forwarded-Proto $scheme;
     }
 
-    location / {
-        # Handle other locations or serve static files if needed
-        # ...
-    }
-
-    # Additional Nginx configurations as needed
 }
 
